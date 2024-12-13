@@ -36,4 +36,4 @@ int main (int argc, char **argv)
   else fprintf (stderr, "Uso: cmc [-v] [-t] fichero\n");
 
  return (0);
-} 
+}

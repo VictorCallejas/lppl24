@@ -4,8 +4,8 @@
     #include "header.h"
     #include "libtds.h"
 
-    extern int dvar; /* desplazamiento variables */
-    extern int niv;  /* nivel ("global"=0 o "local"=1) */
+    extern int dvar;
+    extern int niv;
 
     int hayMain = FALSE;
     int refFunActual = -1;  
@@ -81,17 +81,18 @@
 %%
 
 programa:
+    /* Cargamos el contexto global */
     {
       niv = 0; dvar = 0;
-      cargaContexto(niv); /* Cargar contexto global */
+      /* Crear contexto global */
+      cargaContexto(0);
     }
     listDecla
     {
       if (!hayMain) {
         yyerror("No existe la funcion main");
       }
-      /* Aqui NO mostramos la TdS, ni falta hace */
-      descargaContexto(niv); /* Descargar contexto global */
+      /* No descargar contexto global ni mostrar TdS global */
     }
     ;
 
@@ -103,7 +104,7 @@ decla: declaVar
      | declaFunc
      ;
 
-/* Declaracion de variables */
+/* Variables globales en contexto global ya cargado */
 declaVar: tipoSimp ID_ PCOMA_
         {
           if (!insTdS($2, VARIABLE, $1, niv, dvar, -1))
@@ -546,4 +547,5 @@ listParamAct: expre
 
 %%
 
-/* Sin yyerror aquí. Definida en principal.c */
+/* Sin definición de yyerror; está en principal.c */
+
