@@ -17,7 +17,9 @@ digito          [0-9]
 letra           [a-zA-Z]
 identificador   {letra}({letra}|{digito}|_)*
 numero          {digito}+(\.{digito}*)?|\.{digito}+
+
 comentario     \/\/.*
+
 %%
 
 {delimitador}  { if(verbosidad) ECHO ; }
@@ -55,20 +57,22 @@ comentario     \/\/.*
 ")"                          { retornar(CP_); }
 "{"                          { retornar(ALLAVE_); }
 "}"                          { retornar(CLLAVE_); }
-"\["                         { retornar(ACOR_); }
-"\]"                         { retornar(CCOR_); }
+"["                          { retornar(ACOR_); }
+"]"                          { retornar(CCOR_); }
 ";"                          { retornar(PCOMA_); }
 ","                          { retornar(COMA_); }
 
-{identificador}              {
-                                yylval.ident = strdup(yytext);
-                                retornar(ID_);
-                             }
+{identificador} {
+    yylval.ident = strdup(yytext);
+    retornar(ID_);
+}
 
-{numero}                     {
-                                yylval.cent = atoi(yytext);
-                                retornar(CTE_);
-                             }
+{numero} {
+    yylval.cent = atoi(yytext);
+    retornar(CTE_);
+}
 
-.                            { yyerror("Caracter desconocido"); }
+. { yyerror("Caracter desconocido"); return 0; }
+
 %%
+

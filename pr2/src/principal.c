@@ -1,22 +1,18 @@
-/*****************************************************************************/
-/*  Programa principal y tratamiento de errores.                             */
-/*                       Jose Miguel Benedi, 2022-2023 <jbenedi@dsic.upv.es> */
-/*****************************************************************************/
 #include <stdio.h>
 #include <string.h>
 #include "header.h"
 
-int verTdS=FALSE;                        /* Flag para mostrar la TDS         */
-int verbosidad=FALSE;                    /* Flag si se desea una traza       */
-int numErrores=0;                        /* Contador del numero de errores   */
-/*****************************************************************************/
+int verTdS=FALSE;     /* Flag para mostrar la TDS         */
+int verbosidad=FALSE; /* Flag si se desea una traza       */
+int numErrores=0;     /* Contador del numero de errores   */
+
 void yyerror(const char * msg)
 /*  Tratamiento de errores.                                                  */
 {
   numErrores++;  fflush(stdout);
   fprintf(stdout, "\nError en %d: %s\n", yylineno, msg);
 }
-/*****************************************************************************/
+
 int main (int argc, char **argv) 
 /* Gestiona la linea de comandos e invoca al analizador sintactico-semantico.*/
 { int i, n = 1;
@@ -41,4 +37,3 @@ int main (int argc, char **argv)
 
  return (0);
 } 
-/*****************************************************************************/

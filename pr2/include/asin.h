@@ -87,7 +87,9 @@ extern int yydebug;
     PCOMA_ = 288,                  /* PCOMA_  */
     COMA_ = 289,                   /* COMA_  */
     ID_ = 290,                     /* ID_  */
-    CTE_ = 291                     /* CTE_  */
+    CTE_ = 291,                    /* CTE_  */
+    UMINUS = 292,                  /* UMINUS  */
+    UPLUS = 293                    /* UPLUS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -96,12 +98,15 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 8 "src/asin.y"
+#line 53 "src/asin.y"
 
     char *ident;
     int cent;
+    int tipo;
+    int ref;
+    Atributos atr;
 
-#line 105 "asin.h"
+#line 110 "asin.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
